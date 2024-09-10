@@ -50,11 +50,11 @@ public class mainmenu : MonoBehaviour
     }
     public void level2()
     {
-        print("level 1 started");
+        print("level 2 started");
     }
     public void level3()
     {
-        print("level 1 started");
+        print("level 3 started");
     }
 
 }
