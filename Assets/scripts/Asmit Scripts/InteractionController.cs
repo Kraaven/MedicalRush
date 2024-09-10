@@ -23,9 +23,8 @@ public class InteractionController : MonoBehaviour
             // Check if the object hit has the interactable tag
             if (hit.collider.CompareTag(interactableTag))
             {
-                if (Input.GetKeyDown(KeyCode.E)) // Key for interaction
+                if (Input.GetKey(KeyCode.E)) // Keep interacting while the key is held down
                 {
-                    // Call the interaction method on the object
                     IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
                     if (interactableObject != null)
                     {
