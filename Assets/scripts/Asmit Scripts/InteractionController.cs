@@ -1,87 +1,53 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class InteractionController : MonoBehaviour
 {
-
-    //The Range that the Player can interact
-    public float InteractRange;
-    //Source of the Ray to interact
-    public Transform interactorSource;
-    //The Latest GameObject the player sees
-    private GameObject SeenGameObject;
-    //The Current Interactable Onbject
-    public IInteractableObject currentInteractableObject;
-    //The UI message that is displayed
-    public IInteractableObject LastInteracted;
-
-    public void Start()
-    {
-        interactorSource = gameObject.transform;
-        LastInteracted = null;
-    }
+    public float interactionDistance = 3.0f; // Distance from which the player can interact
+    public string interactableTag = "Interactable"; // Tag of the objects you want to interact with
+    public Color rayColor = Color.red; // Color for the raycast line
 
     void Update()
     {
-        //Shoot out a ray
-        Ray r = new Ray(interactorSource.position, interactorSource.forward);
-        
-        //Check if the ray has hit anything
-        if (Physics.Raycast(r, out RaycastHit Hit, InteractRange))
+        RaycastHit hit;
+        Vector3 rayDirection = transform.forward;
+
+        // Cast a ray from the player's position forward
+        if (Physics.Raycast(transform.position, rayDirection, out hit, interactionDistance))
         {
-            //If the hit gameobject is something new
-            if (Hit.collider.gameObject != SeenGameObject)
+            // Draw the raycast line in the Scene view
+            Debug.DrawRay(transform.position, rayDirection * hit.distance, rayColor);
+
+            // Display the name of the object being looked at in the console
+            Debug.Log("Looking at: " + hit.collider.gameObject.name);
+
+            // Check if the object hit has the interactable tag
+            if (hit.collider.CompareTag(interactableTag))
             {
-                //set seen to the new object
-                SeenGameObject = Hit.collider.gameObject;
-                Debug.Log(SeenGameObject.name);
-                
-                //check if the gameobject is interactable
-                if (SeenGameObject.TryGetComponent(out IInteractableObject interactObj))
+                if (Input.GetKeyDown(KeyCode.E)) // Key for interaction
                 {
-                    //Show a custom message if it can be interacted
-                   // InteractMessage.text = interactObj.SeeObject();
-                   currentInteractableObject = interactObj;
-                   Debug.Log("This is a Interactable Object");
-                }
-                else
-                {
-                    //reset the message of the UI, and reset the interactable object
-                    currentInteractableObject = null;
+                    // Call the interaction method on the object
+                    IInteractable interactableObject = hit.collider.GetComponent<IInteractable>();
+                    if (interactableObject != null)
+                    {
+                        interactableObject.Interact();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("The object does not implement IInteractable.");
+                    }
                 }
             }
-            
         }
         else
         {
-            //reset the message of the UI, and reset the interactable object
-            currentInteractableObject = null;
-            SeenGameObject = null;
+            // Draw the raycast line even when not hitting any object
+            Debug.DrawRay(transform.position, rayDirection * interactionDistance, rayColor);
         }
-        
-        //Try to interact with the object
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (LastInteracted != null && LastInteracted.ReInteract() )
-            {
-                LastInteracted.Interact();
-                if (!LastInteracted.ReInteract())
-                {
-                    LastInteracted = null;   
-                }
-            }
-            //Check if the seen object can be interacted with
-            if (currentInteractableObject != null)
-            {
-                currentInteractableObject.Interact();
-                LastInteracted = currentInteractableObject;
-            }
-        }
-        
-        //Debug.Log("Current: "+ currentInteractableObject+" Cache: "+ LastInteracted);
-        
     }
 }
 
+// Interface for objects that can be interacted with
+public interface IInteractable
+{
+    void Interact();
+}
