@@ -242,6 +242,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oCS: {fileID: 1616524198}
   labelEquip: basic
+  pickedScalpel: 0
+  pickedForceps: 0
+  pickedSuturing: 0
+  pickedShockCollar: 0
+  pickedLaser: 0
 --- !u!1 &136264848
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +523,54 @@ MonoBehaviour:
   interactionDistance: 3
   interactableTag: interact
   rayColor: {r: 1, g: 0, b: 0, a: 1}
+--- !u!1 &243781878
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 243781880}
+  - component: {fileID: 243781879}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &243781879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243781878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7ae3f31b3ee314bacd67f65e6bce17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ocs: {fileID: 1616524198}
+  Equiped:
+  - {fileID: 51211666}
+  - {fileID: 1835377993}
+--- !u!4 &243781880
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 243781878}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.292944, y: 2.2870061, z: 0.2588288}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &391609171
 GameObject:
   m_ObjectHideFlags: 0
@@ -950,8 +1003,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4.5
+  sprintSpeed: 10
   acceleration: 10
   deceleration: 10
+  sprintCooldown: 5
   rb: {fileID: 1616524193}
   playerCamera: {fileID: 226895054}
 --- !u!54 &1616524193
@@ -1084,6 +1139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basicEquip: []
   specialEquip: []
+  allEquip: []
 --- !u!1 &1620983914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1119,7 +1175,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 10, y: 10}
+  m_SizeDelta: {x: 5, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1620983916
 MonoBehaviour:
@@ -1279,6 +1335,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oCS: {fileID: 1616524198}
   labelEquip: special
+  pickedScalpel: 0
+  pickedForceps: 0
+  pickedSuturing: 0
+  pickedShockCollar: 0
+  pickedLaser: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1291,3 +1352,4 @@ SceneRoots:
   - {fileID: 1835377997}
   - {fileID: 136264852}
   - {fileID: 1184756009}
+  - {fileID: 243781880}
