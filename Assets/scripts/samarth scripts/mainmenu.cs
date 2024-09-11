@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,14 @@ public class mainmenu : MonoBehaviour
     public GameObject aboutMenu;
 
     public GameObject levelMenu;
-// This method loads the game scene, replace "GameScene" with your actual scene name
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    // This method loads the game scene, replace "GameScene" with your actual scene name
     public void PlayGame()
     {
         mainMenu.SetActive(false);

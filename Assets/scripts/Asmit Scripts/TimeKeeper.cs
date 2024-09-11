@@ -11,6 +11,7 @@ public class TimeKeeper : MonoBehaviour
     private void Start()
     {
         StartCoroutine(CalmPhaseTimer());
+        Equiped.Sort((a, b) => a.name.CompareTo(b.name));
     }
 
     IEnumerator CalmPhaseTimer()
@@ -19,10 +20,11 @@ public class TimeKeeper : MonoBehaviour
         if (Ocs.allEquip.SequenceEqual(Equiped))
         {
             Debug.Log("collected all equipment");
+            SceneManager.LoadScene(1);
         }
         else
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             Debug.Log("TIME UP");
         }
         

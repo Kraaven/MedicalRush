@@ -25,21 +25,26 @@ public class boxinteract : MonoBehaviour,IInteractable
             if(gameObject.name == "Scalpel")
             {
                 pickedScalpel = true;
+                oCS.basicEquip.Add(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("PICKED UP Scalpel");
             }
             else if(gameObject.name == "Forceps")
             {
                 pickedForceps = true;
+                oCS.basicEquip.Add(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("PICKED UP Forceps");
             }
             else if(gameObject.name == "Suturing Device")
             {
                 pickedSuturing = true;
+                oCS.basicEquip.Add(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("PICKED UP Suturing Device");
             }
 
-            oCS.basicEquip.Add(gameObject);
-            gameObject.SetActive(false);
+            
         }
         
         if (oCS.basicEquip.Contains(gameObject) && labelEquip == "special")
@@ -52,16 +57,17 @@ public class boxinteract : MonoBehaviour,IInteractable
             if(gameObject.name == "Lazer")
             {
                 pickedLaser = true;
+                oCS.specialEquip.Add(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("PICKED UP LAZER");
             }
             else if(gameObject.name == "Shock Collar")
             {
                 pickedShockCollar = true;
+                oCS.specialEquip.Add(gameObject);
+                gameObject.SetActive(false);
                 Debug.Log("PICKED UP Shock Collar");
             }
-
-            oCS.specialEquip.Add(gameObject);
-            gameObject.SetActive(false);
         }
         
         

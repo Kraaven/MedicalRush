@@ -20,5 +20,6 @@ public class ObjectCheckScript : MonoBehaviour
     {
         allEquip = new List<GameObject>(basicEquip);
         allEquip.AddRange(specialEquip);
+        allEquip.Sort((a, b) => a.name.CompareTo(b.name));
     }
 }
